@@ -1,0 +1,240 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Riched20 10.0.22621}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang9\par
+\b 1. What is a lambda function in Python, and how does it differ from a regular function?\par
+\b0 ANS.A lambda function in Python is a small, anonymous, and inline function that is defined using the lambda keyword. Lambda functions are also known as "anonymous functions" because they don't have a name. They are typically used for short, simple operations where a full function definition would be overkill. Lambda functions are often used in situations where you need a small function for a short period and don't want to define a regular function using the def keyword.\par
+Here's the basic syntax of a lambda function:\par
+lambda arguments: expression\par
+Here's an example of a lambda function that adds two numbers:\par
+\par
+add = lambda x, y: x + y\par
+result = add(3, 5)\par
+print(result)  \par
+Lambda functions have some key differences compared to regular (named) functions:\par
+Anonymous: Lambda functions do not have a name. They are defined and used in place, making them useful for short, one-time operations.\par
+Limited Expressiveness: Lambda functions are limited to a single expression, which means they are best suited for simple operations. You cannot include statements or multiple expressions inside a lambda.\par
+\par
+No Documentation Strings: Lambda functions do not support docstrings, which are used in regular functions to provide documentation.\par
+Single Line: Lambda functions are typically defined in a single line, enhancing their concise nature.\par
+No Statements: Lambda functions cannot contain statements, only expressions. This means you can't use constructs like if, else, for, or while inside a lambda function.\par
+Regular functions, defined using the def keyword, can be more versatile and are used for more complex tasks. They can contain multiple expressions, statements, have names, support docstrings, and be reused across different parts of your code. In contrast, lambda functions are best suited for situations where brevity and simplicity are more important than the additional features and structure offered by regular functions.\par
+\par
+\b 2. Can a lambda function in Python have multiple arguments? If yes, how can you define and use\par
+them?\par
+ANS\b0 .Yes, a lambda function in Python can have multiple arguments. You can define and use multiple arguments in a lambda function by separating them with commas, just like in a regular function. Here's the syntax:\par
+lambda argument1, argument2, ... : expression\par
+Here's an example of a lambda function with multiple arguments that calculates the product of two numbers:\par
+multiply = lambda x, y: x * y\par
+result = multiply(3, 5)\par
+print(result)  \par
+In this example, x and y are the two arguments of the lambda function, and the expression x * y calculates their product. When you call multiply(3, 5), it passes 3 as x and 5 as y, and the lambda function returns the result of the multiplication, which is 15.\par
+You can define lambda functions with as many arguments as needed, separated by commas, and use them in your code where appropriate. However, keep in mind that lambda functions are typically used for simple operations, so if you find yourself needing many arguments or complex logic, it may be more readable and maintainable to use a regular (named) function instead.\par
+\par
+\b 3. How are lambda functions typically used in Python? Provide an example use case.\b0\par
+ANS.Lambda functions in Python are typically used for short, simple operations where a full function definition using the def keyword would be overly verbose or unnecessary. They are often used in situations where you need to pass a function as an argument to another function (e.g., in higher-order functions) or when you need a quick, throwaway function for a specific task. Here's an example use case for lambda functions:\par
+Sorting a List of Dictionaries:\par
+Suppose you have a list of dictionaries, and you want to sort that list based on a specific key in each dictionary. You can use the sorted() function and a lambda function as the key argument to achieve this easily.\par
+people = [\par
+    \{'name': 'Alice', 'age': 30\},\par
+    \{'name': 'Bob', 'age': 25\},\par
+    \{'name': 'Eve', 'age': 35\}\par
+]\par
+sorted_people = sorted(people, key=lambda x: x['age'])\par
+print(sorted_people)\par
+In this example, we use a lambda function as the key argument in the sorted() function to specify that we want to sort the people list of dictionaries based on the 'age' key in each dictionary. The lambda function lambda x: x['age'] extracts the 'age' value from each dictionary, and sorted() sorts the list of dictionaries accordingly.\par
+Lambda functions are handy in situations like this where you need a simple function for a specific sorting task, and you don't want to define a separate named function. However, if the sorting logic becomes more complex or needs to be reused elsewhere in your code, it's a good practice to define a regular function using def for better readability and maintainability.\par
+\par
+\b 4. What are the advantages and limitations of lambda functions compared to regular functions in\par
+Python?\par
+\b0 ANS.Lambda functions in Python offer several advantages and limitations compared to regular functions (defined with the def keyword). Understanding these pros and cons will help you decide when to use lambda functions and when to opt for regular functions.\par
+\par
+Advantages of Lambda Functions:\par
+\par
+Conciseness: Lambda functions are concise and allow you to define small, one-line functions in a more compact way, reducing the amount of code you need to write.\par
+Anonymous: Lambda functions are anonymous, meaning they don't have a name. This can be useful when you need a short, throwaway function for a specific task without cluttering your code with function names.\par
+Readability: For simple operations, lambda functions can improve code readability by keeping the function definition inline with the code that uses it.\par
+Functional Programming: Lambda functions are often used in functional programming constructs like map, filter, and sorted, where you need to pass a function as an argument.\par
+Scoped Variables: Lambda functions capture variables from their surrounding scope (closure), making them useful in situations where you want to create specialized functions based on some external variables.\par
+\par
+Limitations of Lambda Functions:\par
+\par
+Limited Expressiveness: Lambda functions are restricted to a single expression. You cannot include statements or multiple expressions within a lambda function.\par
+No Documentation Strings: Lambda functions do not support docstrings, which are used for documenting regular functions.\par
+Limited Complexity: Due to their concise nature, lambda functions are best suited for simple operations. Complex logic is better placed in regular functions for clarity and maintainability.\par
+No Reusability: Lambda functions are typically designed for short-term, one-time use. If you need to reuse a function in multiple places, it's better to define a regular function.\par
+No Statements: Lambda functions cannot contain statements like if, else, for, or while. They can only contain expressions.\par
+In summary, lambda functions are a valuable tool in Python for simplifying code and expressing simple operations in a concise manner. They shine in functional programming contexts and scenarios where you need a small, anonymous function on the fly. However, for more complex or reusable functions, regular functions are a better choice due to their greater flexibility, documentation capabilities, and readability. The choice between lambda functions and regular functions should be based on the specific requirements of your code and the trade-offs between brevity and clarity.\par
+\par
+\b 5. Are lambda functions in Python able to access variables defined outside of their own scope?\par
+Explain with an example.\b0\par
+ANS.Yes, lambda functions in Python can access variables defined outside of their own scope. This behavior is known as "closure." Lambda functions capture and remember the values of variables from their surrounding (enclosing) scope when they are defined. This can be particularly useful in situations where you want to create specialized functions that depend on external variables. Here's an example to illustrate this concept:\par
+def outer_function(x):\par
+    inner_function = lambda y: x + y\par
+    return inner_function\par
+closure = outer_function(10)\par
+result = closure(5)\par
+print(result)  \par
+In this example:\par
+We define an outer_function that takes an argument x.\par
+Inside outer_function, we define a lambda function inner_function that takes another argument y. The lambda function captures the value of x from the outer function's scope.\par
+We then call outer_function with the argument 10, which creates a closure by returning the inner_function with the captured value of x (which is 10 in this case).\par
+Finally, we call the closure closure with the argument 5, and it adds 5 to the captured value of x (10), resulting in 15.\par
+The lambda function inner_function retains access to the x variable even after outer_function has finished executing. This ability to "close over" and access variables from the enclosing scope is a fundamental feature of closures in Python and is not limited to lambda functions. It's a powerful mechanism that allows for more flexible and expressive coding patterns in Python.\par
+\par
+\b\par
+6. Write a lambda function to calculate the square of a given number.\b0\par
+ANS.\par
+You can write a lambda function to calculate the square of a given number in Python like this:\par
+square = lambda x: x**2\par
+In this lambda function:\par
+lambda is used to define the lambda function.\par
+x is the input argument.\par
+x**2 is the expression that calculates the square of x.\par
+You can then use this lambda function to calculate the square of a number by calling it with an argument:\par
+result = square(5)\par
+print(result)  In the example above, we pass 5 as an argument to the square lambda function, which returns 25, the square of 5.\par
+\par
+\b 7. Create a lambda function to find the maximum value in a list of integers.\b0\par
+ANS.\par
+You can create a lambda function to find the maximum value in a list of integers using the max() function along with a lambda function as the key argument. Here's how you can do it:\par
+find_max = lambda lst: max(lst)\par
+numbers = [12, 45, 78, 23, 56, 89]\par
+max_value = find_max(numbers)\par
+print(max_value)  \par
+In this example:\par
+\par
+We define a lambda function find_max that takes a list lst as an argument.\par
+Inside the lambda function, we use the max() function with lst as its argument. The max() function returns the maximum value from the list.\par
+When you call find_max(numbers) with a list of integers, it returns the maximum value in that list.\par
+\par
+\b 8. Implement a lambda function to filter out all the even numbers from a list of integers.\b0\par
+ANS. Certainly! You can use a lambda function along with the filter() function to filter out all the even numbers from a list of integers . Here's an example:\par
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\par
+filtered_numbers = list(filter(lambda x: x % 2 == 0, numbers))\par
+print(filtered_numbers)\par
+In this code:\par
+We have a list of integers called numbers.\par
+We use the filter() function to filter the even numbers from the list.\par
+The lambda function lambda x: x % 2 == 0 is used as the filtering criterion. It checks whether a number is even by checking if the remainder of the division by 2 is 0.\par
+The list() function is used to convert the filtered result into a list.\par
+After running this code, filtered_numbers will contain only the even numbers from the original list, and the result will be [2, 4, 6, 8, 10]. \par
+\b\par
+9. Write a lambda function to sort a list of strings in ascending order based on the length of each\par
+string.\par
+ANS.\b0 You can use a lambda function as the key argument in the sorted() function to sort a list of strings in ascending order based on the length of each string. Here's an example:\par
+strings = ["apple", "banana", "cherry", "date", "fig"]\par
+sorted_strings = sorted(strings, key=lambda x: len(x))\par
+print(sorted_strings)\par
+In this code:\par
+We have a list of strings called strings.\par
+We use the sorted() function to sort the strings based on the length of each string.\par
+The lambda function lambda x: len(x) is used as the key function. It calculates the length of each string (len(x)) and uses it for sorting.\par
+After running this code, sorted_strings will contain the strings sorted in ascending order based on their lengths, and the result will be ['date', 'fig', 'apple', 'cherry', 'banana'].\par
+\par
+\b 10. Create a lambda function that takes two lists as input and returns a new list containing the\par
+common elements between the two lists.\b0\par
+ANS.You can create a lambda function that takes two lists as input and returns a new list containing the common elements between the two lists using the filter() function and a lambda function for filtering. Here's how you can do it:\par
+list1 = [1, 2, 3, 4, 5]\par
+list2 = [3, 4, 5, 6, 7]\par
+common_elements = list(filter(lambda x: x in list1, list2))\par
+print(common_elements)\par
+In this code:\par
+We have two lists, list1 and list2.\par
+We use the filter() function to filter elements from list2 that are also present in list1.\par
+The lambda function lambda x: x in list1 is used as the filtering criterion. It checks whether each element in list2 is also in list1.\par
+The list() function is used to convert the filtered result into a list.\par
+After running this code, the common_elements list will contain the common elements between list1 and list2. In this example, the result will be [3, 4, 5], as these are the elements that appear in both lists.\par
+\par
+\b 11. Write a recursive function to calculate the factorial of a given positive integer\b0 .\par
+ANS. You can write a recursive function to calculate the factorial of a positive integer The factorial of a non-negative integer n is the product of all positive integers from 1 to n. Here's how you can implement it:\par
+def factorial(n):\par
+    if n == 0 or n == 1:\par
+        return 1\par
+        return n * factorial(n - 1)\par
+result = factorial(5)\par
+print(result)  \par
+In this code:\par
+The factorial function takes a positive integer n as its argument.\par
+The base case is when n is 0 or 1. In these cases, the factorial is 1 because 0! and 1! are defined as 1.\par
+In the recursive case, the function calculates the factorial of n as n multiplied by the factorial of (n-1). This recursive call continues until it reaches the base case.\par
+Finally, the function returns the calculated factorial.\par
+When you call factorial(5) as in the example, it calculates and returns the factorial of 5, which is 120.\par
+\b\par
+12. Implement a recursive function to compute the nth Fibonacci number.\b0\par
+ANS.You can implement a recursive function to compute the nth Fibonacci number . The Fibonacci sequence is a series of numbers where each number is the sum of the two preceding ones, typically starting with 0 and 1. Here's how you can implement the recursive Fibonacci function:\par
+def fibonacci(n):\par
+    if n == 0:\par
+        return 0\par
+    elif n == 1:\par
+        return 1\par
+\par
+        return fibonacci(n - 1) + fibonacci(n - 2)\par
+result = fibonacci(10)\par
+print(result)  \par
+In this code:\par
+The fibonacci function takes a non-negative integer n as its argument.\par
+The base cases are when n is 0 or 1. In these cases, the Fibonacci number is defined as 0 and 1, respectively.\par
+In the recursive case, the function calculates the Fibonacci number of n as the sum of the Fibonacci numbers of (n-1) and (n-2). This recursive call continues until it reaches the base cases.\par
+Finally, the function returns the calculated Fibonacci number.\par
+When you call fibonacci(10) as in the example, it calculates and returns the 10th Fibonacci number, which is 55.\par
+\b\par
+13. Create a recursive function to find the sum of all the elements in a given list\b0 .\b\par
+\b0 ANS.You can create a recursive function to find the sum of all the elements in a given list Here's how you can implement it:\par
+def recursive_sum(lst):\par
+    if not lst:\par
+        return 0\par
+        return lst[0] + recursive_sum(lst[1:])\par
+my_list = [1, 2, 3, 4, 5]\par
+result = recursive_sum(my_list)\par
+print(result)  \par
+In this code:\par
+The recursive_sum function takes a list lst as its argument.\par
+The base case is when the list is empty (not lst). In this case, the sum of the elements is defined as 0.\par
+In the recursive case, the function calculates the sum of the list by adding the first element (lst[0]) to the sum of the rest of the elements (recursive_sum(lst[1:])). The recursive call continues until the base case is reached.\par
+Finally, the function returns the calculated sum.\par
+When you call recursive_sum(my_list) as in the example, it calculates and returns the sum of all the elements in the list, which is 15 for the given list [1, 2, 3, 4, 5].\par
+\par
+\b 14. Write a recursive function to determine whether a given string is a palindrome.\par
+\b0 ANS.You can write a recursive function to determine whether a given string is a palindrome . A palindrome is a string that reads the same forwards and backward. Here's how you can implement such a function:\par
+def is_palindrome(s):\par
+    if len(s) <= 1:\par
+        return True\par
+    else:\par
+        first_char = s[0]\par
+        last_char = s[-1]\par
+        if first_char == last_char:\par
+            return is_palindrome(s[1:-1])\par
+        else:\par
+            return False\par
+test_string1 = "racecar"\par
+test_string2 = "hello"\par
+print(is_palindrome(test_string1))  \par
+print(is_palindrome(test_string2))  \par
+In this code:\par
+The is_palindrome function takes a string s as its argument.\par
+The base case is when the length of the string is 0 or 1. In these cases, the string is considered a palindrome.\par
+In the recursive case, the function compares the first and last characters of the string (first_char and last_char). If they are equal, it continues checking the middle portion of the string by making a recursive call with s[1:-1]. If the first and last characters are not equal, it returns False.\par
+The function recursively checks smaller and smaller portions of the string until it either determines that the string is not a palindrome or reaches the base case, in which case it returns True.\par
+When you call is_palindrome(test_string1) with the palindrome "racecar," it returns True. When you call it with the non-palindrome "hello," it returns False.\par
+\par
+\b 15. Implement a recursive function to find the greatest common divisor (GCD) of two positive integers.\par
+\b0 ANS.You can implement a recursive function to find the greatest common divisor (GCD) of two positive integers  using the Euclidean algorithm. Here's how you can do it:\par
+def gcd(a, b):\par
+    # Base case: GCD(a, 0) = a\par
+    if b == 0:\par
+    else:\par
+        return gcd(b, a % b)\par
+num1 = 48\par
+num2 = 18\par
+result = gcd(num1, num2)\par
+print(result)  \par
+In this code:\par
+The gcd function takes two positive integers, a and b, as its arguments.\par
+The base case is when b is 0. In this case, the GCD is a, as GCD(a, 0) is defined as a.\par
+In the recursive case, the function calculates the GCD of a and b by making a recursive call to gcd(b, a % b). The algorithm continues to find the GCD by replacing a with b and b with the remainder of a divided by b until b becomes 0.\par
+Finally, the function returns the calculated GCD.\par
+When you call gcd(48, 18) as in the example, it calculates and returns the GCD of 48 and 18, which is 6.\par
+\par
+\b\par
+}
+ 
